@@ -1,0 +1,17 @@
+[Unit]
+Description="Mahalia"
+After=mahalia-setup.service network-online.target
+
+[Service]
+TimeoutStartSec=0
+LimitRTPRIO=infinity
+LimitMEMLOCK=infinity
+User=mha
+ExecStart=/usr/share/mahalia-utils/mahalia start
+ExecStop=/usr/share/mahalia-utils/mahalia stop
+ExecReload=/usr/share/mahalia-utils/mahalia reload
+StandardOutput=journal
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

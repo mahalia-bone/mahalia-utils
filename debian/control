@@ -1,0 +1,13 @@
+Source: mahalia-utils
+Priority: optional
+Section: sound
+Maintainer: Christopher Obbard <chris@64studio.com>
+Build-Depends: debhelper (>= 10), dh-systemd
+Standards-Version: 3.9.8
+
+Package: mahalia-utils
+Architecture: all
+Pre-Depends: dnsmasq, hostapd, alsa-utils
+Depends: ${misc:Depends}
+Description: Mahalia Utils
+ Long description here

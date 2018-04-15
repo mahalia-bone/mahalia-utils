@@ -1,0 +1,34 @@
+#!/bin/sh
+set -e
+if [ "$1" = 'configure' ]; then
+	# unpack kernel modules
+	tar -xzf /usr/share/mahalia-utils/modules.tar.gz -C /
+	rm /usr/share/mahalia-utils/modules.tar.gz
+
+	# configure motd & other system files
+	cp /usr/share/mahalia-utils/motd /etc/motd
+
+	# setup permissions
+	chown mha:mha /etc/mahalia
+	chown mha:mha /etc/mahalia/*
+
+	# setup dnsmasq & hostapd
+	echo "DAEMON_CONF=\"/etc/hostapd/hostapd.conf\"" > /etc/default/hostapd
+
+	deb-systemd-invoke enable dnsmasq
+	#deb-systemd-invoke start dnsmasq
+
+	# hostapd is masked by default
+	systemctl unmask hostapd
+	deb-systemd-invoke enable hostapd
+	#deb-systemd-invoke start hostapd
+
+	# Install and start daemon
+	deb-systemd-invoke enable mahalia
+	deb-systemd-invoke enable mahalia-setup
+	#deb-systemd-invoke start mahalia
+
+	exit 0
+fi
+
+#DEBHELPER#

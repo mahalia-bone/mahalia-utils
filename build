@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# this is chris's build script.
+# please modify the address etc
+
+./copy-kernel
+dpkg-buildpackage -aarmhf -I.git -uc -us
+scp ../mahalia-utils_0.0.1_all.deb chris@mahaliabuild.64studio.net:/home/chris/beaglestrap/incoming/mahalia-utils.deb

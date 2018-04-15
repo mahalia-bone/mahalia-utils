@@ -1,0 +1,17 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --with=systemd
+
+#override_dh_auto_build:
+#	. ./build.sh
+
+
+override_dh_installinit:
+	dh_systemd_enable -pmahalia-utils --name=mahalia mahalia.service
+	dh_systemd_enable -pmahalia-utils --name=mahalia-setup mahalia-setup.service
+	dh_installinit -pmahalia-utils
+	dh_installinit -pmahalia-utils --name=mahalia
+	dh_installinit -pmahalia-utils --name=mahalia-setup
+	dh_systemd_start -pmahalia-utils mahalia.service --no-restart-on-upgrade
+	dh_systemd_start -pmahalia-utils mahalia-setup.service --no-restart-on-upgrade

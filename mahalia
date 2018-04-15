@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+#
+# this script is run by the service as the user mha
+#
+
+SCRIPT_PATH=$(readlink -f "$0")			# save path to this script
+BASE="/usr/share/mahalia-utils"			# the base folder for the project
+CONF="/etc/mahalia/config"			# the location of the configuration file
+source $BASE/functions.sh			# include bash functions
+source $CONF					# include config file
+
+if [ $1 == "start" ]; then
+	echo "[mahalia] Starting"
+
+	# turn LED off
+	echo none > $MAHALIA_LED/trigger
+
+	# stop programs from previous attempts
+	killall -s SIGTERM mha
+	killall -s SIGTERM jackd
+	sleep 5
+
+	# start jack audio server
+	jackd -R -P$JACK_PRIORITY -dalsa -d$JACK_SOUNDCARD -r$JACK_SAMPLERATE -p$JACK_BUFFER -n$JACK_FRAMES $JACK_OPTS &
+	sleep 5
+
+	# turn LED on
+	echo default-on > $MAHALIA_LED/trigger
+
+	# start openMHA
+	#source thismha.sh
+	mha --interface=$OPENMHA_INTERFACE --port=$OPENMHA_PORT $OPENMHA_OPTS
+
+	# restart script
+	exec "$SCRIPT_PATH"
+
+elif [ $1 == "stop" ]; then
+	echo "[mahalia] Stopping"
+
+	# turn LED off
+	echo none > $MAHALIA_LED/trigger
+
+	# kill the services
+	killall -s SIGTERM jackd
+	killall -s SIGTERM mha
+
+	exit 0
+
+elif [ $1 == "reload" ]; then
+	echo "[mahalia] Reloading"
+	$BASE/mahalia stop
+	$BASE/mahalia start
+fi
