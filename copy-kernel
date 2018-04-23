@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# build kernel & u-boot before running this script
+KERNEL_DIR="/home/chris/projects/ti-linux-kernel"
+UBOOT_DIR="/home/chris/projects/oldenburg/u-boot"
+
+if [ ! -d "$KERNEL_DIR" ]; then
+    echo "cannot find kernel. Quitting."
+    exit 1
+fi
+
+if [ ! -d "$UBOOT_DIR" ]; then
+    echo "cannot find u-boot. Quitting."
+    exit 1
+fi
+
+# clean kernel folder first
+rm -rf kernel
+mkdir kernel
+
+# copy kernel & modules
+cp ${KERNEL_DIR}/arch/arm/boot/zImage kernel/
+cp ${KERNEL_DIR}/arch/arm/boot/dts/*-audio-extension.dtb kernel/
+tar czf kernel/modules.tar.gz -C ${KERNEL_DIR}/compiled_modules .
+
+# copy uboot
+cp $UBOOT_DIR/MLO kernel/
+cp $UBOOT_DIR/u-boot.img kernel/
+
+# build u-boot script
+${UBOOT_DIR}/tools/mkimage -C none -A arm -T script -d boot.cmd kernel/boot.scr
+
+echo "done!"
