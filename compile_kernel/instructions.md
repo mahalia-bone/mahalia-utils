@@ -1,3 +1,7 @@
+
+patch kernel & install dependencies:
+
+```
 apt-get install build-essential git ncurses-dev gcc-arm-linux-gnueabihf bc
 
 git clone git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git
@@ -17,9 +21,11 @@ make distclean
 ARCH=arm make ti_sdk_am3x_rt_release_defconfig
 
 ARCH=arm make menuconfig
+```
 
 Navigate thru menuconfig:
 
+```
 Setup real-time Kernel:
  > General Setup
 	> Timers subsystem
@@ -39,19 +45,22 @@ Setup real-time Kernel:
 
 	> CPU Idle
 		[ ] CPU idle PM support
-
+```
 
 Compile the driver:
- > Device Drivers
+```
+> Device Drivers
 	> Sound card support > Advanced Linux Sound Architecture > ALSA for SoC audio support
 		<M>   SoC Audio support for Boneblack Audio Extension
 
 	> File systems > Native language support
 		<*> ASCII (United States)
+```
 
-
+```
 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make -j6 zImage modules dtbs
 
 rm -rf compiled_modules && mkdir compiled_modules
 
 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=compiled_modules make modules_install
+```
