@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 
-SCP_TO="chris@mahaliabuild.64studio.net:/home/chris/beaglestrap/incoming/mahalia-utils.deb"
-
 # build debian package
 dpkg-buildpackage -aarmhf -I.git -uc -us
-
-# copy debian package to pdk incoming folder
-scp ../mahalia-utils_0.0.1_all.deb $SCP_TO
 
 echo "done!"
