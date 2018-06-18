@@ -22,6 +22,7 @@ if [ $1 == "start" ]; then
 	sleep 5
 
 	# start jack audio server
+	export JACK_NO_AUDIO_RESERVATION=1
 	jackd -R -P$JACK_PRIORITY -dalsa -d$JACK_SOUNDCARD -r$JACK_SAMPLERATE -p$JACK_BUFFER -n$JACK_FRAMES $JACK_OPTS &
 	sleep 5
 
