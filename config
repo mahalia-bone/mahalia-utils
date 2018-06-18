@@ -10,6 +10,6 @@ JACK_FRAMES=2
 JACK_OPTS=""
 
 # openMHA settings
-OPENMHA_INTERFACE=`hostname -I | cut -d ' ' -f 1` # the external IP adress
+OPENMHA_INTERFACE="0.0.0.0"
 OPENMHA_PORT="33337"
-OPENMHA_OPTS="--daemon"
+OPENMHA_OPTS="--daemon --log=/tmp/openmha.log"

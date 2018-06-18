@@ -1,6 +1,14 @@
 #!/bin/sh
 set -e
 if [ "$1" = 'configure' ]; then
+	# create user
+	USERNAME="mha"
+	ENCRYPTED_PASSWORD=`mkpasswd -m sha-512 "mahalia"`
+	adduser --gecos $USERNAME --add_extra_groups --disabled-password $USERNAME
+	usermod -aG audio $USERNAME
+	usermod -aG sudo $USERNAME
+	usermod -p "${ENCRYPTED_PASSWORD}" $USERNAME
+
 	# unpack kernel modules
 	tar -xzf /usr/share/mahalia-utils/modules.tar.gz -C /
 	rm /usr/share/mahalia-utils/modules.tar.gz

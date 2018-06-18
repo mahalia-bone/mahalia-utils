@@ -7,7 +7,7 @@ Standards-Version: 3.9.8
 
 Package: mahalia-utils
 Architecture: all
-Pre-Depends: dnsmasq, hostapd, alsa-utils
+Pre-Depends: dnsmasq, hostapd, alsa-utils, whois
 Depends: ${misc:Depends}
 Description: Mahalia Utils
  Long description here

@@ -1,3 +1,10 @@
+mahalia-utils (0.0.2) unstable; urgency=medium
+
+  * Allow sample rates other than 24 kHz to be selected.
+  * Configuration modifications.
+
+ -- Christopher Obbard <chris@64studio.com>  Mon, 18 Jun 2018 21:01:50 +0100
+
 mahalia-utils (0.0.1) unstable; urgency=medium
 
   * Initial release.
