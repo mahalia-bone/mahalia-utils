@@ -10,8 +10,8 @@ if [ "$1" = 'configure' ]; then
 	usermod -p "${ENCRYPTED_PASSWORD}" $USERNAME
 
 	# unpack kernel modules
-	tar -xzf /usr/share/mahalia-utils/modules.tar.gz -C /
-	rm /usr/share/mahalia-utils/modules.tar.gz
+	#tar -xvzf /usr/share/mahalia-utils/modules.tar.gz -C /
+	#rm /usr/share/mahalia-utils/modules.tar.gz
 
 	# configure motd & other system files
 	cp /usr/share/mahalia-utils/motd /etc/motd
@@ -35,6 +35,24 @@ if [ "$1" = 'configure' ]; then
 	deb-systemd-invoke enable mahalia
 	deb-systemd-invoke enable mahalia-setup
 	#deb-systemd-invoke start mahalia
+
+# setup wifi hotspot
+echo "
+# wifi hotspot
+auto wlan0
+iface wlan0 inet static
+  address 10.0.0.1
+  netmask 255.255.255.0" >> /etc/network/interfaces
+
+# setup usb <-> ethernet bridge
+echo "g_ether" >> /etc/modules
+echo "
+# usb <-> ethernet bridge
+auto usb0
+iface usb0 inet static
+  address 192.168.7.2
+  netmask 255.255.255.0" >> /etc/network/interfaces
+
 
 	exit 0
 fi

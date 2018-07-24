@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # build kernel & u-boot before running this script
-KERNEL_DIR="/home/chris/projects/ti-linux-kernel"
-UBOOT_DIR="/home/chris/projects/oldenburg/u-boot"
+KERNEL_DIR="$HOME/projects/mahalia/mahalia-kernel"
+UBOOT_DIR="$HOME/projects/mahalia/mahalia-u-boot"
 
 if [ ! -d "$KERNEL_DIR" ]; then
     echo "cannot find kernel. Quitting."
@@ -18,10 +18,14 @@ fi
 rm -rf kernel
 mkdir kernel
 
-# copy kernel & modules
+# copy kernel
 cp ${KERNEL_DIR}/arch/arm/boot/zImage kernel/
 cp ${KERNEL_DIR}/arch/arm/boot/dts/*-audio-extension.dtb kernel/
-tar czf kernel/modules.tar.gz -C ${KERNEL_DIR}/compiled_modules .
+
+# copy kernel modules
+#tar czf kernel/modules.tar.gz -C ${KERNEL_DIR}/compiled_modules .
+mkdir kernel/modules
+cp -R ${KERNEL_DIR}/compiled_modules/* kernel/modules/
 
 # copy uboot
 cp $UBOOT_DIR/MLO kernel/

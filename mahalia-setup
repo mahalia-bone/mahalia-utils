@@ -12,8 +12,8 @@ SOUNDCARD_CONF="/etc/mahalia/cape4all.alsactl.state" # the location of the sound
 source $BASE/functions.sh			# include bash functions
 source $CONF					# include config file
 
-# tell user what is happening
-echo "[mahalia-setup] Setting up soundcard settings"
+# status message
+echo "setting up soundcard"
 
 # set permissions of LED
 chmod 777 $MAHALIA_LED/trigger
@@ -26,3 +26,6 @@ set_irq_priority_ff "edma_ccint" 95
 
 # restore soundcard settings
 alsactl restore -f $SOUNDCARD_CONF
+
+# status message
+echo "done setting up soundcard"

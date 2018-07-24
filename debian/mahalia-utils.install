@@ -3,7 +3,8 @@ kernel/u-boot.img boot
 kernel/boot.scr boot
 kernel/zImage boot
 kernel/*.dtb boot
-kernel/modules.tar.gz usr/share/mahalia-utils
+#kernel/modules.tar.gz usr/share/mahalia-utils
+kernel/modules/lib/modules lib
 
 conf/hostapd.conf etc/hostapd
 conf/dnsmasq.conf etc/dnsmasq.d

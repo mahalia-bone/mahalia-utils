@@ -37,19 +37,55 @@ Setup real-time Kernel:
 		[ ] CPU idle PM support
 ```
 
-Compile the driver:
 ```
+Compile the driver:
 > Device Drivers
 	> Sound card support > Advanced Linux Sound Architecture > ALSA for SoC audio support
 		<M>   SoC Audio support for Boneblack Audio Extension
 
-	> File systems > Native language support
+> File systems
+	> Native language support
 		<*> ASCII (United States)
 ```
 
 ```
-ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make -j6 zImage modules dtbs
+Compile Bluetooth driver:
+
+> Device Drivers
+	> Character devices
+		<*> Serial device bus
+
+> Device Drivers
+	> Misc devices > Texas Instruments shared transport line discipline
+		<*> Shared transport core driver
+
+> Networking support
+	> Bluetooth subsystem support
+		<*> RFCOMM protocol support
+		[*] RFCOMM TTY support
+		<*>     BNEP protocol support
+		[*]       Multicast filter support
+		[*]       Protocol filter support
+
+> Networking support
+	> Bluetooth subsystem support > Bluetooth device drivers
+		< > Marvell Bluetooth driver support
+		<M> Texas Instruments WiLink7 driver
+
+		<M> HCI UART driver
+		[*] HCILL protocol support
+
+
+```
+Enable power button driver:
+
+INPUT_TPS65218_PWRBUTTON=y
+> Device Drivers
+	> Input device support > Miscellaneous devices
+		<*> TPS65218 Power button driver
+
+```
+ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make -j8 zImage modules dtbs
 rm -rf compiled_modules && mkdir compiled_modules
 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=compiled_modules make modules_install
-tar czf modules.tar.gz -C compiled_modules/ .
 ```
