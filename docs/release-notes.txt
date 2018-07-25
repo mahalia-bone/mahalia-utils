@@ -1,0 +1,18 @@
+Mahalia V5 Release notes:
+ - netcat package installed (allows you to communicate with openMHA when logged into the Mahalia system)
+ - USB networking support added (see mahalia-docs repo for information)
+ - power button (near LEDs) cleanly shuts system down
+ - cape4all driver V4 (supports multiple sample rates; debug messages removed)
+ - Bluetooth & BLE Kernel & userland support
+ - mahalia-ble-peripheral software included & started at boot (see mahalia-ble-peripheral repo for information)
+
+ - mahalia-utils version 0.0.2
+ - openMHA version 4.6.1  (packages kindly provided by Paul at HoerTech)
+ - jackd2 version 1.9.12
+ - Linux kernel version 4.14.50-rt30
+
+
+TODO STILL (by end of August):
+ - flash Mahalia system to onboard MMC
+ - test flasher on BBB. Only tested on BBBW
+ - handover PDK project

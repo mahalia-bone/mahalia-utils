@@ -1,9 +1,13 @@
 mahalia-utils (0.0.2) unstable; urgency=medium
 
-  * Allow sample rates other than 24 kHz to be selected.
-  * Configuration modifications.
+  * Allow sample rates other than 24 kHz.
+  * Various system configuration modifications.
+  * Netcat package installed.
+  * Power button cleanly shuts down system.
+  * Bluetooth & Bluetooth Low Energy support.
+  * USB networking support.
 
- -- Christopher Obbard <chris@64studio.com>  Mon, 18 Jun 2018 21:01:50 +0100
+ -- Christopher Obbard <chris@64studio.com>  Wed, 25 Jul 2018 19:36:48 +0100
 
 mahalia-utils (0.0.1) unstable; urgency=medium
 
