@@ -2,7 +2,7 @@
 This package contains the customizations for the Mahalia Hearing Aid 
 Research system.
 
-Please see the `docs/` directory for more information.
+[Please click here to read the User Guide](docs/mahalia-distro.md) for more information on how to use the Mahalia system.
 
 # Building mahalia-utils
 
