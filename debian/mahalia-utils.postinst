@@ -34,6 +34,7 @@ if [ "$1" = 'configure' ]; then
 	# Install and start daemon
 	deb-systemd-invoke enable mahalia
 	deb-systemd-invoke enable mahalia-setup
+	deb-systemd-invoke enable mahalia-flasher
 	#deb-systemd-invoke start mahalia
 
 # setup wifi hotspot
