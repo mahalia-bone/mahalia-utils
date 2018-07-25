@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+#
+# flasher
+#
+# flashes the image from the MicroSD card into the internal MMC
+#
+
+# set SW2 GPIO to input
+echo 72 > /sys/class/gpio/export
+echo in > /sys/class/gpio/gpio72/direction
+
+# if SW2 GPIO not pressed (high) then exit script
+if [ "$(cat /sys/class/gpio/gpio72/value)" == "1" ]; then
+  exit 0
+fi
+
+# switch is pressed; flash image!
+echo "flashing image to internal eMMC" > /dev/kmsg
+
+# flash the leds slowly to signify flashing
+for LED in heartbeat mmc0 usr2 usr3; do
+  LED=/sys/class/leds/beaglebone:green:$LED
+  echo timer > $LED/trigger
+  echo 500 > $LED/delay_on
+  echo 500 > $LED/delay_off
+done
+
+
+# flash image from SD card to eMMC
+dd if=/dev/mmcblk0 of=/dev/mmcblk1 bs=4M
+
+# check eMMC filesystem for errors
+fsck -p -y -f /dev/mmcblk1p1
+fsck -p -y -f /dev/mmcblk1p2
+
+# mount MMC
+mkdir -p /mnt/emmc
+mount /dev/mmcblk1p2 /mnt/emmc/
+mount /dev/mmcblk1p1 /mnt/emmc/boot
+
+# modify /etc/fstab
+sed -i 's/mmcblk0/mmcblk1/g' /mnt/emmc/etc/fstab
+
+# modify boot.scr
+mv /mnt/emmc/boot/boot-emmc.scr /mnt/emmc/boot/boot.scr
+
+# regenerate ssh keys
+rm -rf /mnt/emmc/etc/ssh/ssh_host_*_key
+chroot /mnt/emmc ssh-keygen -f /etc/ssh/ssh_host_rsa_key -t rsa -N ""
+chroot /mnt/emmc ssh-keygen -f /etc/ssh/ssh_host_dsa_key -t dsa -N ""
+chroot /mnt/emmc ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -t ecdsa -N ""
+chroot /mnt/emmc ssh-keygen -f /etc/ssh/ssh_host_ed25519_key -t ed25519 -N ""
+
+# remove flasher script from startup
+rm /mnt/emmc/etc/systemd/system/mahalia-flasher.service
+
+# unmount eMMC filesystem
+umount /mnt/emmc/boot
+umount /mnt/emmc
+
+
+# image flashing has completed
+echo "finished flashing image to internal eMMC!" > /dev/kmsg
+
+# flash the leds fast to signify completed
+for LED in heartbeat mmc0 usr2 usr3; do
+  LED=/sys/class/leds/beaglebone:green:$LED
+  echo timer > $LED/trigger
+  echo 50 > $LED/delay_on
+  echo 50 > $LED/delay_off
+done
+
+# wait for the user to restart system
+sleep infinity

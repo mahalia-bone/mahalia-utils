@@ -32,6 +32,7 @@ cp $UBOOT_DIR/MLO kernel/
 cp $UBOOT_DIR/u-boot.img kernel/
 
 # build u-boot script
-${UBOOT_DIR}/tools/mkimage -C none -A arm -T script -d boot.cmd kernel/boot.scr
+${UBOOT_DIR}/tools/mkimage -C none -A arm -T script -d boot.cmd kernel/boot.scr > /dev/null 2>&1
+${UBOOT_DIR}/tools/mkimage -C none -A arm -T script -d boot-emmc.cmd kernel/boot-emmc.scr > /dev/null 2>&1
 
 echo "done!"

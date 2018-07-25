@@ -1,0 +1,11 @@
+[Unit]
+Description="Mahalia Flasher"
+After=sound.target
+Before=mahalia-setup.service mahalia.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/mahalia-utils/mahalia-flasher
+
+[Install]
+WantedBy=multi-user.target

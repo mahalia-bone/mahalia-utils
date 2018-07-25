@@ -6,6 +6,7 @@ mahalia-utils (0.0.2) unstable; urgency=medium
   * Power button cleanly shuts down system.
   * Bluetooth & Bluetooth Low Energy support.
   * USB networking support.
+  * Support for flashing Mahalia to Internal MMC.
 
  -- Christopher Obbard <chris@64studio.com>  Wed, 25 Jul 2018 19:36:48 +0100
 

@@ -1,7 +1,7 @@
-# boot from SD card
+# boot from eMMC
 
 # command line
-setenv bootargs console=ttyO0,115200n8 noinitrd root=/dev/mmcblk0p2 rootfstype=ext4 rw rootwait
+setenv bootargs console=ttyO0,115200n8 noinitrd root=/dev/mmcblk1p2 rootfstype=ext4 rw rootwait
 
 # fallback devicetree blob
 setenv dtb_file am335x-boneblack-audio-extension.dtb
@@ -12,8 +12,8 @@ if test $board_name = BBBW; then
 fi
 
 # load kernel & devicetree to memory
-load mmc 0:1 ${loadaddr} zImage
-load mmc 0:1 ${fdtaddr} ${dtb_file}
+load mmc 1:1 ${loadaddr} zImage
+load mmc 1:1 ${fdtaddr} ${dtb_file}
 
 # boot!
 bootz ${loadaddr} - ${fdtaddr}

@@ -1,6 +1,6 @@
 kernel/MLO boot
 kernel/u-boot.img boot
-kernel/boot.scr boot
+kernel/*.scr boot
 kernel/zImage boot
 kernel/*.dtb boot
 #kernel/modules.tar.gz usr/share/mahalia-utils
@@ -12,6 +12,7 @@ conf/sysctl.conf etc/sysctl.d
 
 motd usr/share/mahalia-utils
 mahalia usr/share/mahalia-utils
+mahalia-flasher usr/share/mahalia-utils
 mahalia-setup usr/share/mahalia-utils
 functions.sh usr/share/mahalia-utils
 

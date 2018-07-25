@@ -101,6 +101,10 @@ The system may take up to 60 seconds to boot, with activity on the 4 "USR" LEDS.
 Once JACK and openMHA have started, the USR0 LED shall illuminate solid blue.
 
 
+# FLASHING MAHALIA TO BEAGLEBONE INTERNAL EMMC
+[Please click here](emmc_flasher.md) for more information.
+
+
 
 # SERIAL DEBUG CONSOLE
 
