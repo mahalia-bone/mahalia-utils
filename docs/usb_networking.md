@@ -36,7 +36,7 @@ cdc_ether 5-1.2:1.0 enp3s0u1u2: renamed from usb0
 
 Setup the network interface:
 ```
-$ cat /etc/metwork/interfaces
+$ cat /etc/network/interfaces
 ...
 # usb for BBB
 auto enp3s0u1u2
