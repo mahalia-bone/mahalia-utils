@@ -18,7 +18,7 @@ fi
 echo "flashing image to internal eMMC" > /dev/kmsg
 
 # flash the leds slowly to signify flashing
-for LED in heartbeat mmc0 usr2 usr3; do
+for LED in usr3; do
   LED=/sys/class/leds/beaglebone:green:$LED
   echo timer > $LED/trigger
   echo 500 > $LED/delay_on
@@ -63,7 +63,7 @@ umount /mnt/emmc
 echo "finished flashing image to internal eMMC!" > /dev/kmsg
 
 # flash the leds fast to signify completed
-for LED in heartbeat mmc0 usr2 usr3; do
+for LED in usr3; do
   LED=/sys/class/leds/beaglebone:green:$LED
   echo timer > $LED/trigger
   echo 50 > $LED/delay_on
