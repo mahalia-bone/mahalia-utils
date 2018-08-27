@@ -24,7 +24,7 @@ if [ $1 == "start" ]; then
 	# start jack audio server
 	export JACK_NO_AUDIO_RESERVATION=1
 	jackd -R -P$JACK_PRIORITY -dalsa -d$JACK_SOUNDCARD -r$JACK_SAMPLERATE -p$JACK_BUFFER -n$JACK_FRAMES $JACK_OPTS &
-	sleep 5
+	sleep 20
 
 	# turn LED on
 	echo default-on > $MAHALIA_LED/trigger
@@ -43,8 +43,8 @@ elif [ $1 == "stop" ]; then
 	echo none > $MAHALIA_LED/trigger
 
 	# kill the services
-	killall -s SIGTERM jackd
 	killall -s SIGTERM mha
+	killall -s SIGTERM jackd
 
 	exit 0
 
