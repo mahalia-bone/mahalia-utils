@@ -5,6 +5,9 @@
 # flashes the image from the MicroSD card into the internal MMC
 #
 
+# base path for LEDs
+LED=/sys/class/leds/beaglebone:green
+
 # set SW2 GPIO to input
 echo 72 > /sys/class/gpio/export
 echo in > /sys/class/gpio/gpio72/direction
@@ -17,13 +20,15 @@ fi
 # switch is pressed; flash image!
 echo "flashing image to internal eMMC" > /dev/kmsg
 
-# flash the leds slowly to signify flashing
-for LED in usr3; do
-  LED=/sys/class/leds/beaglebone:green:$LED
-  echo timer > $LED/trigger
-  echo 500 > $LED/delay_on
-  echo 500 > $LED/delay_off
-done
+# leds
+echo none > $LED:heartbeat/trigger
+echo none > $LED:mmc0/trigger
+echo none > $LED:usr2/trigger
+
+# flash the led fast to signify flashing progress
+echo timer > $LED:usr3/trigger
+echo 50 > $LED:usr3/delay_on
+echo 50 > $LED:usr3/delay_off
 
 
 # flash image from SD card to eMMC
@@ -62,13 +67,8 @@ umount /mnt/emmc
 # image flashing has completed
 echo "finished flashing image to internal eMMC!" > /dev/kmsg
 
-# flash the leds fast to signify completed
-for LED in usr3; do
-  LED=/sys/class/leds/beaglebone:green:$LED
-  echo timer > $LED/trigger
-  echo 50 > $LED/delay_on
-  echo 50 > $LED/delay_off
-done
+# turn LED on to signify completed
+echo default-on > $LED:usr3/trigger
 
 # wait for the user to restart system
 sleep infinity

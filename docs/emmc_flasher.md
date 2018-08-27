@@ -3,9 +3,10 @@
 Flash the Mahalia image to an SD card in the normal way, but when booting the 
 system, press and hold the switch labelled SW2 near the micro SD card.
 
-The USR3 LED on the BeagleBone should start to flash slowly. You may now 
-release SW2. The flashing process takes around three minutes and once the image 
-has completed flashing, the USR3 LED should flash much quicker.
+Keep holding the switch until the USR3 LED on the BeagleBone starts to flash 
+quickly. You may now release SW2. The flashing process takes around three 
+minutes and once the image has completed flashing, the USR3 LED should stop 
+flashing and just stay illuminated.
 
 You may now power down the BeagleBone safely by pressing the power button and 
 waiting for the LED to extinguish. After the LEDs have extinguished, please 
