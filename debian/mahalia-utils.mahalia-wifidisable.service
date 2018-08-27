@@ -1,0 +1,12 @@
+[Unit]
+Description="Mahalia Wifi Disable"
+Before=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/rfkill block wifi
+RemainAfterExit=true
+ExecStop=/usr/sbin/rfkill unblock wifi
+
+[Install]
+WantedBy=multi-user.target

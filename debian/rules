@@ -15,6 +15,7 @@ override_dh_installinit:
 	dh_installinit -pmahalia-utils --name=mahalia
 	dh_installinit -pmahalia-utils --name=mahalia-setup
 	dh_installinit -pmahalia-utils --name=mahalia-flasher
+	dh_installinit -pmahalia-utils --name=mahalia-wifidisable
 	dh_systemd_start -pmahalia-utils mahalia.service --no-restart-on-upgrade
 	dh_systemd_start -pmahalia-utils mahalia-setup.service --no-restart-on-upgrade
 	dh_systemd_start -pmahalia-utils mahalia-flasher.service --no-restart-on-upgrade

@@ -1,6 +1,6 @@
 [Unit]
 Description="Mahalia"
-After=mahalia-setup.service network-online.target
+After=mahalia-setup.service network.target
 
 [Service]
 TimeoutStartSec=0
