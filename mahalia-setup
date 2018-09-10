@@ -15,6 +15,14 @@ source $CONF					# include config file
 # status message
 echo "setting up soundcard"
 
+# read the serial number from eeprom & store for later
+hexdump -e '8/1 "%c"' /sys/bus/i2c/devices/0-0050/eeprom -s 4 -n 24 > /tmp/bb_serial
+SERIAL_NUMBER=`cat /tmp/bb_serial`
+
+# set wifi ssid & replace serial number
+WIFI_SSID=`echo $WIFI_SSID | sed -e "s/\\\$SERIAL_NUMBER/$SERIAL_NUMBER/g"`
+sed -i "s/^ssid=.*$/ssid=$WIFI_SSID/" /etc/hostapd/hostapd.conf
+
 # set permissions of LED
 chmod 777 $MAHALIA_LED/trigger
 

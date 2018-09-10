@@ -1,6 +1,10 @@
 # mahalia settings
 MAHALIA_LED="/sys/class/leds/beaglebone:green:heartbeat"
 
+# wifi settings
+# $SERIAL_NUMBER is replaced with the device serial number
+WIFI_SSID="Mahalia_\$SERIAL_NUMBER"
+
 # jack settings
 JACK_PRIORITY=90
 JACK_SOUNDCARD=hw:boneaudioext
