@@ -16,7 +16,7 @@ source $CONF					# include config file
 echo "setting up soundcard"
 
 # read the serial number from eeprom & store for later
-hexdump -e '8/1 "%c"' /sys/bus/i2c/devices/0-0050/eeprom -s 4 -n 24 > /tmp/bb_serial
+hexdump -e '8/1 "%c"' /sys/bus/i2c/devices/0-0050/eeprom -s 12 -n 16 | tr -d '\n' > /tmp/bb_serial
 SERIAL_NUMBER=`cat /tmp/bb_serial`
 
 # set wifi ssid & replace serial number
