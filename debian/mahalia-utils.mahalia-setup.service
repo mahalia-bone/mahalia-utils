@@ -1,6 +1,7 @@
 [Unit]
 Description="Mahalia Setup"
 After=sound.target
+Before=hostapd.service
 
 [Service]
 Type=oneshot
