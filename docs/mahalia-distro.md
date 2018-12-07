@@ -71,8 +71,9 @@ The following instructions have been written for a unix-like system. The
 commands may differ dependent on the operating system. A microSD card writer is 
 required for this step.
 
+If you require a modified Mahalia image, please see the [build instructions](mahalia-build.md).
 
-Download the image from the 64 Studio Ltd server:
+Most users will prefer to download a ready-made image from the 64 Studio server, replacing ??? in the following URL with the version they require, such as 'v9':
 
 ```
 $ wget -O mahalia-bone.img http://dl.64studio.net/mahalia/mahalia-bone-v???.img
