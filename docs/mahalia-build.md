@@ -27,7 +27,7 @@ gpg --gen-key
 
 ## Download PDK project 'Mahalia'
 
-- Download the archive containing the PDK project to your build server. We'll assume this file is called mahalia-distro_master.tar.gz and it will be downloaded into the home directory of the 'apt' user that we'll create to serve packages and images.
+- Download the archive containing the PDK project to your build server. We'll assume this file is called _mahalia-distro_master.tar.gz_ and it will be downloaded into the home directory of the 'apt' user that we'll create to serve packages and images.
 
 ```bash
 sudo adduser apt
@@ -47,8 +47,10 @@ git init
 
 ## Modify project for your needs
 
-- You will need to change the \<mediagen.root-password\> for the generated image, the \<apt-deb.key\> to the email address apt@your-domain that you created earlier
-- Set the MEDIAGEN_PATH to the location of PDK's mediagen script on your system. If you have installed pdk-mediagen from the 64 Studio apt repository mentioned above, this path will be /usr/share/pdk-mediagen/mediagen
+- Copy any updated Mahalia applications or other local packages into the _debs_ directory of the PDK workspace.
+- You can change the \<mediagen.root-password\> for the generated image to something more secure.
+- Change the \<apt-deb.key\> to the email address of the repository key apt@your-domain that you created earlier.
+- Set the MEDIAGEN_PATH to the location of PDK's mediagen script on your system. If you have installed pdk-mediagen from the 64 Studio apt repository mentioned above, this path will be _/usr/share/pdk-mediagen/mediagen_
 
 ```bash
 nano Makefile
@@ -66,7 +68,7 @@ make image
 
 - All the standard Debian packages required will be downloaded, and the distro image created. This can take ten minutes to half an hour, depending on the speed of the build server's CPU. 
 
-- After this, you should find the _out.img_ file and a compressed version out.img.gz in your PDK workspace.
+- After this, you should find the _out.img_ file and a compressed version _out.img.gz_ in your PDK workspace.
 
 - PDK will create a checksum file _out.img.md5sum_ for users to compare against when the image is downloaded. 
 
@@ -77,4 +79,7 @@ make image
 
 - Please refer to the [Mahalia flashing instructions](https://github.com/mahalia-bone/mahalia-utils/blob/master/docs/mahalia-distro.md) to get the image onto the BeagleBone.
 
-- See the [PDK project on GitHub](https://github.com/64studio/pdk) for more details of how to use PDK.
+
+## Further reading
+
+See the [PDK project on GitHub](https://github.com/64studio/pdk) for more details of how to use PDK.
