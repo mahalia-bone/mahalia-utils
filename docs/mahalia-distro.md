@@ -10,7 +10,7 @@ ___  ___      _           _ _
 # Hearing Aid Research Platform for BeagleBone Black & BeagleBone Black Wireless
 
 
-contact:  chris <at> 64studio.com
+contact:  chris \<at\> 64studio.com
 
 
 
