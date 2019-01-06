@@ -7,7 +7,7 @@ Standards-Version: 3.9.8
 
 Package: mahalia-utils
 Architecture: all
-Pre-Depends: dnsmasq, hostapd, alsa-utils, whois, firmware-ti-connectivity
+Pre-Depends: dnsmasq, hostapd, alsa-utils, whois, firmware-ti-connectivity, i2c-tools
 Depends: ${misc:Depends}
 Description: Mahalia Utils
  Tweaks and setup for the Mahalia system

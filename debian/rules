@@ -11,11 +11,14 @@ override_dh_installinit:
 	dh_systemd_enable -pmahalia-utils --name=mahalia mahalia.service
 	dh_systemd_enable -pmahalia-utils --name=mahalia-setup mahalia-setup.service
 	dh_systemd_enable -pmahalia-utils --name=mahalia-flasher mahalia-flasher.service
+	dh_systemd_enable -pmahalia-utils --name=mahalia-batcat mahalia-batcat.service
 	dh_installinit -pmahalia-utils
 	dh_installinit -pmahalia-utils --name=mahalia
 	dh_installinit -pmahalia-utils --name=mahalia-setup
 	dh_installinit -pmahalia-utils --name=mahalia-flasher
 	dh_installinit -pmahalia-utils --name=mahalia-wifidisable
+	dh_installinit -pmahalia-utils --name=mahalia-batcat
 	dh_systemd_start -pmahalia-utils mahalia.service --no-restart-on-upgrade
 	dh_systemd_start -pmahalia-utils mahalia-setup.service --no-restart-on-upgrade
 	dh_systemd_start -pmahalia-utils mahalia-flasher.service --no-restart-on-upgrade
+	dh_systemd_start -pmahalia-utils mahalia-batcat.service --no-restart-on-upgrade

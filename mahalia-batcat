@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+echo "setting LOMODE/ROMODE"
+
+# set GPIO 1_17 to input
+#echo "49" > /sys/class/gpio/export
+#echo in > /sys/class/gpio/gpio49/direction
+#cat /sys/class/gpio/gpio49/value
+
+# if GPIO  1_17 not high then exit script
+#if [ "$(cat /sys/class/gpio/gpio49/value)" == "1" ]; then
+#  exit 0
+#fi
+
+# set LOMODE & ROMODE bits of each of the codecs
+for ADDR in 0x38 0x39 0x3a; do
+	for REG in 0x25 0x26; do
+		# read register value
+		i2cset -y -f 2 $ADDR 0x40 $REG
+		VAL=`i2cget -y -f 2 $ADDR`
+
+		# set bit
+		VAL=`printf '0x%02X\n' "$(($VAL | 0x01))"`
+
+		# write register
+		i2cset -y -f 2 $ADDR 0x40 $REG $VAL i
+	done
+done

@@ -14,6 +14,7 @@ motd usr/share/mahalia-utils
 mahalia usr/share/mahalia-utils
 mahalia-flasher usr/share/mahalia-utils
 mahalia-setup usr/share/mahalia-utils
+mahalia-batcat usr/share/mahalia-utils
 functions.sh usr/share/mahalia-utils
 
 config etc/mahalia
