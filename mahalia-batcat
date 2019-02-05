@@ -1,28 +1,33 @@
 #!/usr/bin/env bash
 
-echo "setting LOMODE/ROMODE"
+# set soundcard settings
+for CARD in C0 C1 C2; do
+	# Set the LOMODE bit to enable differential headphone out, UNMUTE the output and set the gain to 0dB.
+	amixer sset "$CARD Lineout" on
+	amixer sset "$CARD Lineout" 0dB
+	amixer sset "$CARD LO Mode" on
 
-# set GPIO 1_17 to input
-#echo "49" > /sys/class/gpio/export
-#echo in > /sys/class/gpio/gpio49/direction
-#cat /sys/class/gpio/gpio49/value
+	# Enable Mixer5
+	amixer sset "$CARD Left LR Playback Mixer Left" 6dB
+done
+sleep 5s
 
-# if GPIO  1_17 not high then exit script
-#if [ "$(cat /sys/class/gpio/gpio49/value)" == "1" ]; then
-#  exit 0
-#fi
+# set GPIO 1_17 to output (initally low)
+echo "49" > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio49/direction
+echo 0 > /sys/class/gpio/gpio49/value
 
-# set LOMODE & ROMODE bits of each of the codecs
-for ADDR in 0x38 0x39 0x3a; do
-	for REG in 0x25 0x26; do
-		# read register value
-		i2cset -y -f 2 $ADDR 0x40 $REG
-		VAL=`i2cget -y -f 2 $ADDR`
+# set GPIO 3_19 to input
+echo "115" > /sys/class/gpio/export
+echo in > /sys/class/gpio/gpio115/direction
 
-		# set bit
-		VAL=`printf '0x%02X\n' "$(($VAL | 0x01))"`
-
-		# write register
-		i2cset -y -f 2 $ADDR 0x40 $REG $VAL i
-	done
+# wait for switch to be pressed
+while true; do
+	if [ "$(cat /sys/class/gpio/gpio115/value)" == "0" ]; then
+		echo "switch is pressed!"
+		echo 1 > /sys/class/gpio/gpio49/value
+		sleep 2s
+		echo 0 > /sys/class/gpio/gpio49/value
+		sleep 2s
+	fi
 done
