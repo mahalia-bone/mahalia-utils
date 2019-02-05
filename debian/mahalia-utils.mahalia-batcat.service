@@ -1,0 +1,12 @@
+[Unit]
+Description="Mahalia Bat&Cat Script"
+After=mahalia-setup.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/mahalia-utils/mahalia-batcat
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
+
