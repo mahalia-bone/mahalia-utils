@@ -1,8 +1,8 @@
 # mahalia-utils
-This package contains the customizations for the Mahalia Hearing Aid 
-Research system.
 
-[Please click here to read the User Guide](docs/mahalia-distro.md) for more information on how to use the Mahalia system.
+This package contains customizations for the _Mahalia_ hearing aid research system, a GNU/Linux distribution for ARM devices based on [Debian](https://www.debian.org/) and [openMHA](https://github.com/HoerTech-gGmbH/openMHA).
+
+Please read our documentation on [how to use the Mahalia system](docs/mahalia-distro.md) and [how to build Mahalia images](docs/mahalia-build.md).
 
 # Building mahalia-utils
 
@@ -12,4 +12,4 @@ sudo apt install dh-systemd
 ./build
 ```
 
-the resulting `deb` package is in the parent directory.
+The resulting `deb` package should be in the parent directory.
