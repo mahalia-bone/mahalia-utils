@@ -13,17 +13,17 @@ wget -qO - https://apt.64studio.net/archive-keyring.asc | sudo apt-key add -
 sudo apt update
 sudo apt install pdk pdk-mediagen
 ```
-- Ignore the `rng-tools` service if it fails to start with "Cannot find a hardware RNG device to use." You won't need this to run as a service for now
+- Ignore the `rng-tools` service if it fails to start with "Cannot find a hardware RNG device to use." You won't need this to run as a service for now.
 
 ## APT Repository key
 
-- Start up the random number daemon which we'll use in a minute for key generation, then create a user called _apt_ with sudo rights to use for building images and serving packages
+- Start up the random number daemon which we'll use in a minute for key generation, then create a user called _apt_ with sudo rights to use for building images and serving packages.
 
 ```bash
 sudo rngd -r /dev/urandom
 sudo adduser apt sudo
 ```
-- Now log in to the build machine as the _apt_ user with the password you just set, and ensure you are in the apt user's home directory 
+- Now log in to the build machine as the _apt_ user with the password you just set, and ensure you are in the apt user's home directory.
 
 ```
 cd ~
@@ -53,7 +53,7 @@ tar zxvf ~/mahalia-distro_master.tar.gz -C ~/pdk/projects
 cd ~/pdk/projects/mahalia
 git init
 ```
-- Set the MEDIAGEN_PATH to the location of PDK's mediagen script on your system. If you have installed pdk-mediagen from the 64 Studio apt repository mentioned above, this path will be _/usr/share/pdk-mediagen/mediagen_
+- Optionally, set the MEDIAGEN_PATH to the location of PDK's mediagen script on your system, if using a modified version or a non-standard path. If you have installed pdk-mediagen from the 64 Studio apt repository mentioned above, this path will be _/usr/share/pdk-mediagen/mediagen_ and will be included by default, so you can skip this step.
 
 ```
 export MEDIAGEN_PATH=/usr/share/pdk-mediagen/mediagen
