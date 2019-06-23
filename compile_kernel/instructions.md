@@ -1,12 +1,12 @@
 patch kernel & install dependencies:
 
 ```
-apt-get install build-essential git ncurses-dev gcc-arm-linux-gnueabihf bc
+apt-get install build-essential git ncurses-dev gcc-arm-linux-gnueabihf bc kmod
 git clone git://git.ti.com/ti-linux-kernel/ti-linux-kernel.git
 cd ti-linux-kernel
 git checkout origin/ti-rt-linux-4.14.y -b ti-rt-linux-4.14.y-cape4all
-copy in 0001-cape4all-driver-V2.patch
-git apply --reject --whitespace=fix 0001-cape4all-driver-V3.patch
+copy in 0001-cape4all-driver-V4.patch
+git apply --reject --whitespace=fix 0001-cape4all-driver-V4.patch
 make distclean
 ./ti_config_fragments/defconfig_builder.sh -t ti_sdk_am3x_rt_release
 ARCH=arm make ti_sdk_am3x_rt_release_defconfig
